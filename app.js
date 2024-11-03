@@ -6,6 +6,7 @@ const express = require('express');
 const app = express()
 
 const morgan = require('morgan')
+const cookieParser = require('cookie-parser')
 
 //database 
 
@@ -18,15 +19,20 @@ const authRouter = require('./routes/authRoutes')
 // middleware
 const notFoundMiddleware = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
+const cors = require('cors')
 
 
 
 app.use(morgan('tiny'))
 app.use(express.json())
+app.use(cookieParser(process.env.JWT_SECRET))
+app.use(cors())
 
+app.use(express.static('./public'))
 
+app.get('api/v1', (req, res) => {
 
-app.get('/', (req, res) => {
+    
     res.send('e-commerce api')
 })
 
