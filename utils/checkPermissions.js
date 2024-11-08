@@ -9,8 +9,9 @@ const checkPermissions = (requestUser, resourceUserId) => {
 
 
     if(requestUser.userId === resourceUserId.toString()){
-        throw new CustomAPIError.UnauthorizedError('Not authorized to access this route')
+        return
     }
+    throw new CustomAPIError.UnauthorizedError('Not authorized to access this route')
     
     
 
